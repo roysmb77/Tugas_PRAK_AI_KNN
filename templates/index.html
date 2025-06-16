@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Klasifikasi Bunga Iris</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            padding: 2rem;
+        }
+        .card {
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            background: rgba(255, 255, 255, 0.9);
+        }
+        .form-control {
+            border-radius: 10px;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+        }
+        .btn-primary {
+            border-radius: 10px;
+            padding: 0.8rem 2rem;
+            background: linear-gradient(45deg, #2193b0, #6dd5ed);
+            border: none;
+            transition: transform 0.3s;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+        }
+        .iris-icon {
+            font-size: 3rem;
+            color: #2193b0;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <div class="card p-4">
+            <div class="text-center mb-4">
+                <i class="fas fa-flower iris-icon"></i>
+                <h1 class="display-4 mb-3">Klasifikasi Bunga Iris</h1>
+                <p class="lead text-muted">Masukkan ukuran bunga untuk memprediksi jenisnya</p>
+            </div>
+            
+            <form action="{{ url_for('result') }}" method="POST">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Sepal Length (cm)</label>
+                            <input type="number" name="sepal_length" class="form-control" step="0.1" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Sepal Width (cm)</label>
+                            <input type="number" name="sepal_width" class="form-control" step="0.1" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Petal Length (cm)</label>
+                            <input type="number" name="petal_length" class="form-control" step="0.1" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Petal Width (cm)</label>
+                            <input type="number" name="petal_width" class="form-control" step="0.1" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        <i class="fas fa-magic me-2"></i>Prediksi
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

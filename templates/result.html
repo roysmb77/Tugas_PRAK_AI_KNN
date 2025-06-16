@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hasil Prediksi</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            padding: 2rem;
+        }
+        .card {
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            background: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+        }
+        .prediction-result {
+            font-size: 1.5rem;
+            color: #2193b0;
+            font-weight: bold;
+        }
+        .probability-list {
+            list-style: none;
+            padding: 0;
+        }
+        .probability-list li {
+            padding: 0.5rem 1rem;
+            margin-bottom: 0.5rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .back-button {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: linear-gradient(45deg, #2193b0, #6dd5ed);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+        .back-button:hover {
+            transform: translateY(-2px);
+            color: white;
+        }
+        .chart {
+            background: white;
+            padding: 1rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .flower-image {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin: 1rem auto;
+            display: block;
+            transition: transform 0.3s;
+        }
+        .flower-image:hover {
+            transform: scale(1.05);
+        }
+        .flower-container {
+            text-align: center;
+            margin: 2rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <div class="card p-4">
+            <div class="text-center mb-4">
+                <i class="fas fa-flower iris-icon"></i>
+                <h1 class="display-4 mb-3">Hasil Prediksi</h1>
+            </div>
+
+            <div class="flower-container">
+                {% if prediction == 'setosa' %}
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Kosaciec_szczecinkowaty_Iris_setosa.jpg/800px-Kosaciec_szczecinkowaty_Iris_setosa.jpg" alt="Iris Setosa" class="flower-image">
+                {% elif prediction == 'versicolor' %}
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Blue_Flag%2C_Ottawa.jpg/800px-Blue_Flag%2C_Ottawa.jpg" alt="Iris Versicolor" class="flower-image">
+                {% elif prediction == 'virginica' %}
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Iris_virginica.jpg/800px-Iris_virginica.jpg" alt="Iris Virginica" class="flower-image">
+                {% endif %}
+            </div>
+
+            <div class="text-center mb-4">
+                <p class="prediction-result">
+                    Jenis bunga yang diprediksi: {{ prediction }}
+                </p>
+            </div>
+
+            <div class="mb-4">
+                <h4 class="mb-3">Probabilitas untuk setiap jenis:</h4>
+                <ul class="probability-list">
+                    {% for label, prob in probabilities.items() %}
+                        <li>
+                            <span>{{ label }}</span>
+                            <span class="badge bg-primary">{{ prob }}%</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="chart mb-4">
+                {{ graph_html|safe }}
+            </div>
+
+            <div class="text-center">
+                <a href="/" class="back-button">
+                    <i class="fas fa-arrow-left me-2"></i>Kembali
+                </a>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
